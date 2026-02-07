@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import Header from "../components/header";
+import Header from "../components/Header";
 import StatusBar from "../components/StatusBar";
 import MovieDisplay from "../components/MovieDisplay";
 import Keyboard from "../components/Keyboard";
