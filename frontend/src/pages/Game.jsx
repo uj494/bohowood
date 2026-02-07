@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import "../style.css";
 
 const vowels = ["A", "E", "I", "O", "U"];
-const API_BASE = "https://bohowood.onrender.com/api";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 export default function App() {
   const [industry, setIndustry] = useState(() => {

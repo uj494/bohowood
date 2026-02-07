@@ -5,11 +5,12 @@ import BackButton from "../components/BackButton";
 export default function CreateChallenge() {
   const [movie, setMovie] = useState("");
   const [link, setLink] = useState("");
+  const API_BASE = import.meta.env.VITE_API_BASE;
 
   async function createChallenge() {
     if (!movie.trim()) return;
 
-    const res = await fetch("https://bohowood.onrender.com/api/challenge", {
+    const res = await fetch(`${API_BASE}/challenge`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ movie })

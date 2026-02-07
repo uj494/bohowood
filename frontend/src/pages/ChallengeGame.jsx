@@ -6,9 +6,10 @@ import GameBoard from "../components/GameBoard";
 export default function ChallengeGame() {
   const { id } = useParams();
   const [movie, setMovie] = useState("");
+  const API_BASE = import.meta.env.VITE_API_BASE;
 
   useEffect(() => {
-    fetch(`https://bohowood.onrender.com/api/challenge/${id}`)
+    fetch(`${API_BASE}/challenge/${id}`)
       .then(res => res.json())
       .then(data => setMovie(data.movie.toUpperCase()));
   }, [id]);
