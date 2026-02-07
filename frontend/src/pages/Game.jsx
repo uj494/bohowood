@@ -154,12 +154,7 @@ export default function App() {
     <div className={`app ${industry}`}>
       {isSwitching && <div className="reel-transition" />}
       <div className="game-container">
-         <button 
-          className="create-challenge-btn"
-          onClick={() => navigate("/create")}
-        >
-          🎬 Play With Your Friends
-        </button>
+         
         <Header industry={industry} setIndustry={setIndustry} setIsSwitching={setIsSwitching} />
        
 
@@ -169,6 +164,13 @@ export default function App() {
         <MovieDisplay masked={masked} />
         <Keyboard guessed={guessed} correct={correct} onGuess={handleGuess} />
         <Actions onSkip={loadMovie} />
+        <br></br>
+        <button 
+          className="create-challenge-btn"
+          onClick={() => navigate("/create")}
+        >
+          🎬 Play With Your Friends
+        </button>
         {result === "lose" && (
           <div className="result-overlay">
             <div className="result-card">
