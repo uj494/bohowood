@@ -1,0 +1,470 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #111, #1c1c1c);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 16px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.toggle {
+  display: flex;
+  background: #1a1a1a;
+  padding: 6px;
+  border-radius: 30px;
+  gap: 6px;
+}
+
+.toggle-btn {
+  border: none;
+  background: transparent;
+  color: #aaa;
+  padding: 10px 18px;
+  border-radius: 24px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* 👇 ACTIVE INDUSTRY */
+.toggle-btn.active {
+  background: linear-gradient(135deg, #ffcc33, #ff9900);
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(255, 200, 0, 0.6);
+  transform: scale(1.05);
+}
+
+/* Optional hover */
+.toggle-btn:hover {
+  color: #fff;
+}
+
+/* Status Bar */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  font-size: 16px;
+}
+
+/* Movie Display */
+.movie-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.letter {
+  width: 36px;
+  height: 44px;
+  border-radius: 8px;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.letter.space {
+  width: 12px;
+  background: transparent;
+}
+
+/* Keyboard */
+.keyboard {
+  margin-top: 20px;
+}
+
+.key-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.key {
+  background: #2c2c2c;
+  border: none;
+  color: #fff;
+  padding: 12px;
+  margin: 2px;
+  border-radius: 6px;
+  font-size: 14px;
+  min-width: 32px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.key:active {
+  transform: scale(0.95);
+}
+
+.key.correct {
+  background: #2ecc71;
+}
+
+.key.wrong {
+  background: #e74c3c;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.action-btn {
+  flex: 1;
+  margin: 0 6px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.hint {
+  background: #3498db;
+  color: #fff;
+}
+
+.skip {
+  background: #555;
+  color: #fff;
+}
+
+/* Base app background */
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  transition: background 0.6s ease;
+}
+
+/* 🎥 Bollywood theme */
+.app.bollywood {
+  background:
+    radial-gradient(circle at top, rgba(255, 80, 80, 0.25), transparent 60%),
+    linear-gradient(135deg, #2a0000, #120000);
+}
+
+/* 🎬 Hollywood theme */
+.app.hollywood {
+  background:
+    radial-gradient(circle at top, rgba(80, 120, 255, 0.25), transparent 60%),
+    linear-gradient(135deg, #050022, #000010);
+}
+
+.app.challenge {
+  background:
+  radial-gradient(circle at top, rgba(0, 0, 0, 0.25), transparent 60%),
+  linear-gradient(135deg, black, #000010);
+}
+
+.reel-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to right,
+      #000 0px,
+      #000 18px,
+      #111 22px
+    );
+  animation: reelWipe 0.5s ease-in-out forwards;
+}
+
+@keyframes reelWipe {
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+
+/* 🎊 Confetti container */
+.confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* 🎉 Confetti pieces */
+.confetti-piece {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 8px;
+  height: 12px;
+  background: red;
+  opacity: 0.9;
+  animation: confetti-explode 1.2s ease-out forwards;
+}
+
+/* Random colors */
+.confetti-piece:nth-child(5n) { background: #ffd700; }
+.confetti-piece:nth-child(5n+1) { background: #ff6f61; }
+.confetti-piece:nth-child(5n+2) { background: #4facfe; }
+.confetti-piece:nth-child(5n+3) { background: #43e97b; }
+.confetti-piece:nth-child(5n+4) { background: #b721ff; }
+
+@keyframes confetti-explode {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(var(--x), var(--y)) rotate(var(--r));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(var(--x) * 1.1), 120vh) rotate(calc(var(--r) * 1.5));
+    opacity: 0;
+  }
+}
+
+
+/* ✨ Sparkle container */
+.sparkles {
+  position: absolute;
+  top: 32%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 50;
+}
+
+.sparkle {
+  position: absolute;
+  width: 7px;          /* slightly bigger */
+  height: 7px;
+  background: radial-gradient(circle, #fff, gold);
+  border-radius: 50%;
+  animation: sparkle-burst 900ms ease-out forwards; /* slower = richer */
+}
+
+@keyframes sparkle-burst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Random spread */
+.sparkle:nth-child(1) { transform: translate(-20px, -10px); }
+.sparkle:nth-child(2) { transform: translate(10px, -25px); }
+.sparkle:nth-child(3) { transform: translate(30px, -5px); }
+.sparkle:nth-child(4) { transform: translate(-30px, -20px); }
+.sparkle:nth-child(5) { transform: translate(0, -30px); }
+.sparkle:nth-child(6) { transform: translate(25px, 10px); }
+.sparkle:nth-child(7) { transform: translate(-25px, 10px); }
+
+@keyframes sparkle {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2) translateY(-20px);
+  }
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(20, 20, 20, 0.9);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  text-align: center;
+}
+
+.card h2 {
+  margin-bottom: 8px;
+  font-size: 22px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  margin-bottom: 16px;
+  outline: none;
+}
+
+.primary-btn {
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffcc33, #ff9900);
+  color: #000;
+  transition: transform 0.15s ease;
+}
+
+.primary-btn:active {
+  transform: scale(0.97);
+}
+
+.share-box {
+  margin-top: 20px;
+  background: #111;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.share-box input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #0f0;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.secondary-btn {
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+.create-challenge-btn {
+  width: 100%;
+  margin: 10px 0 16px;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, rgb(242, 102, 102), rgb(126, 46, 224));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.create-challenge-btn:active {
+  transform: scale(0.97);
+}
+
+.create-challenge-btn:hover {
+  opacity: 0.9;
+}
+
+.back-btn {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.back-btn:hover {
+  color: #fff;
+}
+
+.result-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.result-card {
+  background: #111;
+  padding: 24px;
+  border-radius: 18px;
+  text-align: center;
+  max-width: 320px;
+}
+
+.key {
+  background: #2c2c2c;
+  border: none;
+  color: #fff;
+  padding: 12px;
+  margin: 2px;
+  border-radius: 6px;
+  font-size: 14px;
+  min-width: 32px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.key:active {
+  transform: scale(0.95);
+}
+
+/* ✅ Correct letter */
+.key-correct {
+  background: #2ecc71 !important;
+  color: #000;
+}
+
+/* ❌ Wrong letter */
+.key-wrong {
+  background: #e74c3c !important;
+  color: #fff;
+}
+
+/* Disabled */
+.key:disabled {
+  cursor: not-allowed;
+  opacity: 0.9;
+}
