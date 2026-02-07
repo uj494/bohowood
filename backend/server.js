@@ -18,15 +18,15 @@ mongoose.connect(process.env.MONGO_URI)
 app.use("/api/movie", movieRoutes);
 app.use("/api/challenge", challengeRoutes);
 
-app.use(
-  express.static(path.join(__dirname, "frontend/dist"))
-);
+// app.use(
+//   express.static(path.join(__dirname, "frontend/dist"))
+// );
 
-app.get("*", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "frontend/dist/index.html")
-  );
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(
+//     path.join(__dirname, "frontend/dist/index.html")
+//   );
+// });
 
 app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT}`)
