@@ -8,7 +8,7 @@ export default function ChallengeGame() {
   const [movie, setMovie] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/challenge/${id}`)
+    fetch(`/api/challenge/${id}`)
       .then(res => res.json())
       .then(data => setMovie(data.movie.toUpperCase()));
   }, [id]);

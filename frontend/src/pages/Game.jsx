@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import "../style.css";
 
 const vowels = ["A", "E", "I", "O", "U"];
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "/api";
 
 export default function App() {
   const [industry, setIndustry] = useState(() => {

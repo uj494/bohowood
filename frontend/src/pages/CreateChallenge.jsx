@@ -9,7 +9,7 @@ export default function CreateChallenge() {
   async function createChallenge() {
     if (!movie.trim()) return;
 
-    const res = await fetch("http://localhost:5000/api/challenge", {
+    const res = await fetch("/api/challenge", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ movie })
