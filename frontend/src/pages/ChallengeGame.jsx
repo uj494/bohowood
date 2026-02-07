@@ -8,7 +8,7 @@ export default function ChallengeGame() {
   const [movie, setMovie] = useState("");
 
   useEffect(() => {
-    fetch(`/api/challenge/${id}`)
+    fetch(`https://bohowood.onrender.com/api/challenge/${id}`)
       .then(res => res.json())
       .then(data => setMovie(data.movie.toUpperCase()));
   }, [id]);
