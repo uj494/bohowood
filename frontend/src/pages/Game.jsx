@@ -167,9 +167,16 @@ export default function App() {
         <br></br>
         <button 
           className="create-challenge-btn"
-          onClick={() => navigate("/create")}
+          onClick={() => navigate("/multiplayer")}
         >
           🎬 Play With Your Friends
+        </button>
+        <br></br>
+        <button 
+          className="create-challenge-btn"
+          onClick={() => navigate("/create")}
+        >
+          🎬 Create a Challenge
         </button>
         {result === "lose" && (
           <div className="result-overlay">
