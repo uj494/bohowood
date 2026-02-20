@@ -24,7 +24,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://bohowood.onrender.com"
+    origin: "https://bohowood.vercel.app"
   }
 });
 
