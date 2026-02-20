@@ -10,7 +10,13 @@ import challengeRoutes from "./routes/challenge.routes.js";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: "https://bohowood.vercel.app",
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
@@ -24,7 +30,9 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://bohowood.vercel.app"
+    origin: "https://bohowood.vercel.app",
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
